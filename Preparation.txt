@@ -1,0 +1,37 @@
+**Install the dependencies:**
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install -y build-essential cmake pkg-config libjpeg-dev libtiff5-dev libjasper-dev libpng12-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev libgtk2.0-dev libatlas-base-dev gfortran python3-dev libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev
+
+**Install OpenCV:** 
+pip3 install opencv-python
+pip3 install opencv-python-headless
+
+**Install PyTorch:** 
+pip3 install torch torchvision
+
+**Clone the YOLOv5 repository:** 
+git clone https://github.com/ultralytics/yolov5
+cd yolov5
+
+**Download the pre-trained YOLOv5 model:**  
+wget https://github.com/ultralytics/yolov5/releases/download/v5.0/yolov5s.pt
+
+**Connect your camera to the Raspberry Pi and enable the camera interface:**  
+sudo raspi-config
+
+**Test the camera by capturing an image:**  
+raspistill -o image.jpg
+
+**Run the YOLOv5 detection code, providing the path to the image:**
+python detect.py --weights weights/yolov5s.pt --source /path/to/image.jpg --conf 0.5
+
+**Run the YOLOv5 detection code with a camera as the source:**
+python detect.py --weights weights/yolov5s.pt --source 0 --conf 0.5
+
+//
+The --source 0 argument tells YOLOv5 to use the default camera as the source. 
+The --conf 0.5 argument sets the confidence threshold for object detection. You can adjust this value as needed.
+When you run this command, YOLOv5 will start processing video frames from the camera in real-time and display the bounding boxes around the detected objects in a window. 
+You can press Q to stop the video stream.
+//
